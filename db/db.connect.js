@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const username = process.env['username'];
 const password = process.env['password'];
 
-// const dbURI = `mongodb+srv://${username}:${password}@neog-cluster.wiph4.mongodb.net/books`;
 const dbURI = `mongodb+srv://${username}:${password}@neog-cluster.wiph4.mongodb.net/inventory`;
 
 const dbConnect = async () => {

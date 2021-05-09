@@ -7,8 +7,6 @@ const Book = require('./models/book.model.js');
 
 const app = express();
 
-
-// Connecting to databse
 dbConnect();
 
 app.use(cors());
