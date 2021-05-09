@@ -15,7 +15,6 @@ const BookSchema = new Schema({
   inStock: Boolean
 });
 
-// const Book = mongoose.model('book', BookSchema);
 const Book = mongoose.model('product', BookSchema);
 
 module.exports = Book;
