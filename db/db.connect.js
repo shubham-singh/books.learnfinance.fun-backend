@@ -1,20 +1,25 @@
 const mongoose = require('mongoose');
 
-const username = process.env['username'];
-const password = process.env['password'];
+const dbURI = process.env['dbURI'];
 
-const dbURI = `mongodb+srv://${username}:${password}@neog-cluster.wiph4.mongodb.net/inventory`;
+const { bookSchema } = require('../models/book.model.js');
+const { cartSchema } = require('../models/cart.model.js');
+const { categorySchema } = require('../models/category.model.js');
+const { wishlistSchema } = require('../models/wishlist.model.js');
+// const dbURI = `mongodb+srv://${username}:${password}@neog-cluster.wiph4.mongodb.net/inventory`;
+const dbURItest = `mongodb+srv://${username}:${password}@neog-cluster.wiph4.mongodb.net/test`;
 
-const dbConnect = async () => {
-  try {
-    const connection = await mongoose.connect(dbURI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
-    console.log("Successfully connected to database");
-  } catch (error) {
-    console.error("Database connection failed")
-  }
-}
 
-module.exports = dbConnect;
+const dbConnect = mongoose.createConnection(dbURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: true
+});
+
+const Book = dbConnect.model('book', bookSchema);
+const Cart = dbConnect.model('cart', cartSchema);
+const Wishlist = dbConnect.model('wishlist', wishlistSchema);
+const Category = dbConnect.model('category', bookSchema);
+
+module.exports = { dbConnect, Book, Cart, Wishlist, Category };
