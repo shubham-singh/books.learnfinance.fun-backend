@@ -1,4 +1,4 @@
-const { Book } = require('../db.db.connect.js');
+const { Book } = require('../db/db.connect.js');
 
 const getAllBooks =  async (req, res) => {
   try {

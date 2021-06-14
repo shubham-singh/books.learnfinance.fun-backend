@@ -104,7 +104,7 @@ const addOrRemoveFromWishlist = async (req, res) => {
   try {
 
     const wishlist = await Wishlist.findOne({
-      user_id: req.user.userID;
+      user_id: req.user.userID
     });
 
     const { book } = req.body;

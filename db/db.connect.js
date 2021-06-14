@@ -6,9 +6,6 @@ const { bookSchema } = require('../models/book.model.js');
 const { cartSchema } = require('../models/cart.model.js');
 const { categorySchema } = require('../models/category.model.js');
 const { wishlistSchema } = require('../models/wishlist.model.js');
-// const dbURI = `mongodb+srv://${username}:${password}@neog-cluster.wiph4.mongodb.net/inventory`;
-const dbURItest = `mongodb+srv://${username}:${password}@neog-cluster.wiph4.mongodb.net/test`;
-
 
 const dbConnect = mongoose.createConnection(dbURI, {
   useNewUrlParser: true,
