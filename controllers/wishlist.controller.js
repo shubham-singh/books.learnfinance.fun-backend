@@ -5,7 +5,7 @@ const getWishlist = async (req, res) => {
 
     const wishlist = await Wishlist.findOne({
       user_id: req.user.userID
-    });
+    }).populate('books');
 
     if(wishlist === null) {
       return res.status(200).json({
