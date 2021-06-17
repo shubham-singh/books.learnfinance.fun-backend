@@ -4,7 +4,8 @@ const { Schema } = require('mongoose');
 const cartProductSchema = new Schema({
   book: {
     type: Schema.Types.ObjectId, 
-    ref: 'book'
+    ref: 'book',
+    required: [true, 'Book ID is required']
   },
   quantity: {
     type: Number,

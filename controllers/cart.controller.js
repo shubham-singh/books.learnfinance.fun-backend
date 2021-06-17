@@ -1,17 +1,18 @@
 const { Cart } = require('../db/db.connect.js');
 
-
 const getCart = async (req, res) => {
   try {
 
     const cart = await Cart.findOne({
       user_id: req.user.userID
     }).populate('books.book');
-
+    
     if(cart === null) {
       return res.status(200).json({
         success: true,
-        cart: []
+        cart: {
+          books: []
+        }
       })
     }
 
@@ -102,6 +103,8 @@ const changeQuantity = async (req, res) => {
     }
 
     const cart = await Cart.findOneAndUpdate(filter, update, { new: true })
+
+    console.log(cart);
 
     res.status(200).json({
       success: true,

@@ -10,7 +10,9 @@ const getWishlist = async (req, res) => {
     if(wishlist === null) {
       return res.status(200).json({
         success: true,
-        wishlist: []
+        wishlist: {
+          books: []
+        }
       })
     }
 
