@@ -118,6 +118,8 @@ const addOrRemoveFromWishlist = async (req, res) => {
         books: [book]
       });
 
+      await newWishlist.save();
+
       return res.status(200).json({
         success: true,
         wishlist: newWishlist
