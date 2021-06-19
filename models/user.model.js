@@ -19,10 +19,14 @@ const userSchema = new Schema({
     trim: true,
     minlength: [6, 'Minimum password length is 6 characters']
   },
-  name: {
+  firstName: {
     type: String, 
     trim: true,
     required: [true, 'Name is required']
+  },
+  lastName: {
+    type: String, 
+    trim: true
   }
 });
 
