@@ -104,8 +104,6 @@ const changeQuantity = async (req, res) => {
 
     const cart = await Cart.findOneAndUpdate(filter, update, { new: true })
 
-    console.log(cart);
-
     res.status(200).json({
       success: true,
       cart
