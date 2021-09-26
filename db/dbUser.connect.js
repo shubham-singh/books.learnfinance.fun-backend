@@ -8,7 +8,7 @@ const dbConnectUser = mongoose.createConnection(dbUserURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
-  useFindAndModify: true
+  useFindAndModify: false
 });
 
 const User = dbConnectUser.model('user', userSchema);
