@@ -6,6 +6,7 @@ const bookRoutes = require('./routes/book.route.js');
 const cartRoutes = require('./routes/cart.route.js');
 const authRoutes = require('./routes/auth.route.js');
 const wishlistRoutes = require('./routes/wishlist.route.js');
+const orderRoutes = require('./routes/order.route.js');
 const { checkUser } = require('./middleware/auth.middleware.js');
 
 const app = express();
@@ -30,5 +31,7 @@ app.use(checkUser);
 app.use('/cart', cartRoutes);
 
 app.use('/wishlist', wishlistRoutes);
+
+app.use('/order', orderRoutes);
 
 app.listen(process.env.PORT || 3000, '0.0.0.0');

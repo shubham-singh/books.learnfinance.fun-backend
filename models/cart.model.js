@@ -23,4 +23,4 @@ const cartSchema = new Schema({
   books: [cartProductSchema]
 });
 
-module.exports = { cartSchema };
+module.exports = { cartSchema, cartProductSchema };
