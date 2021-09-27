@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express();
 
-const { createOrder } = require('../controllers/order.controller.js');
+const { createOrder, verifyPayment } = require('../controllers/order.controller.js');
 
 router
 .post('/', createOrder)
-
+.post('/verify', verifyPayment);
 module.exports = router;
