@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const Razorpay = require('razorpay');
 const { User } = require('../db/dbUser.connect.js');
 const { Cart, Order } = require('../db/db.connect.js');
@@ -75,4 +76,40 @@ const createOrder = async (req, res) => {
   }
 }
 
-module.exports = { createOrder };
+const verifyPayment = async (req, res) => {
+  try {
+    const secret = process.env['RAZORPAY_KEY_SECRET'];
+    const { order_id, razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+    
+    const expected_signature = crypto.createHmac('sha256', secret).update((razorpay_order_id + "|" + razorpay_payment_id).toString()).digest('hex');
+
+    if (expected_signature === razorpay_signature) {
+      const filter = {
+        user_id: req.user.userID,
+        "orders._id": order_id,
+        "orders.razorpay_order_id": razorpay_order_id
+      }
+      const update = {
+        "orders.$.status": true,
+        "orders.$.razorpay_payment_id": razorpay_payment_id,
+        "orders.$.razorpay_signature": razorpay_signature,
+      }
+      const updateOrder = await Order.findOneAndUpdate(filter, update, {new: true});
+      const updateCart = await Cart.findOneAndUpdate({user_id: req.user.userID}, {"books": []})
+      return res.status(200).json({
+        success: true
+      })
+    }
+    res.status(200).json({
+      success: false,
+      error: "Payment verification failed"
+    })
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      error: error.message
+    })
+  }
+}
+
+module.exports = { createOrder, verifyPayment };
