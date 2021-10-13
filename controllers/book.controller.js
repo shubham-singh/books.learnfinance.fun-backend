@@ -33,9 +33,12 @@ const addNewBook = async (req, res) => {
 const getBook = async (req, res) => {
   try {
     let { bookID } = req;
-    const book = await Book.findById(id);
+    const book = await Book.findById(bookID);
     if(!book) {
-      throw Error('book not found')
+      return res.status(200).json({
+        success: false,
+        error: "Book not found"
+      })
     }
     res.status(200).json({
       success: true,
